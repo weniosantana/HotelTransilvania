@@ -12,8 +12,8 @@ CREATE TABLE TB_HOSPEDE(
 CREATE TABLE TB_QUARTO(
     NUM_QUARTO VARCHAR2(5),
     DISPONIBILIDADE CHAR DEFAULT (1) CHECK(DISPONIBILIDADE in ( '1', '0' )),/* 1 para disponivel e 0 para indisponivel*/
-    TIPO_QUARTO VARCHAR2(15) CONSTRAINT TB_QUARTO_TIPO_QUARTO_NN NOT NULL,
-    DESCRICAO_QUARTO VARCHAR2(200) CONSTRAINT TB_QUARTO_DESCRICAO_QUARTO_NN NOT NULL,
+    TIPO_QUARTO VARCHAR2(100) CONSTRAINT TB_QUARTO_TIPO_QUARTO_NN NOT NULL,
+    DESCRICAO_QUARTO VARCHAR2(1000) CONSTRAINT TB_QUARTO_DESCRICAO_QUARTO_NN NOT NULL,
     IMG_QUARTO VARCHAR2(100) CONSTRAINT TB_QUARTO_IMG_QUARTO_NN NOT NULL,
     PRECO_QUARTO VARCHAR2(5) CONSTRAINT TB_QUARTO_PRECO_QUARTO_NN NOT NULL,
     CONSTRAINT TB_QUARTO_NUM_QUARTO_PK PRIMARY KEY (NUM_QUARTO)
@@ -30,3 +30,34 @@ CREATE TABLE TB_RESERVA(
     CONSTRAINT TB_RESERVA_CPF_FK FOREIGN KEY (CPF) REFERENCES TB_HOSPEDE (CPF),
     CONSTRAINT TB_RESERVA_NUM_QUARTO_FK FOREIGN KEY (NUM_QUARTO) REFERENCES TB_QUARTO (NUM_QUARTO)
 );
+
+CREATE TABLE TB_VISITANTE (
+    CPF_VISITANTE VARCHAR2(15), 
+    NOME VARCHAR2(50) CONSTRAINT TB_VISITANTE_NOME_NN NOT NULL,
+    HORA_ENTRADA VARCHAR2(5) CONSTRAINT TB_VISITANTE_HORA_ENTRADA_NN NOT NULL,
+    HORA_SAIDA VARCHAR2(5) CONSTRAINT TB_VISTANTE_HORA_SAIDA_NN NOT NULL,
+    CONSTRAINT TB_VISITANTE_CPF_PK PRIMARY KEY (CPF_VISITANTE)
+);
+
+INSERT INTO TB_QUARTO VALUES ('00001', 1, 'Quarto Individual', 'Quarto para uma só pessoa, com uma cama
+individual. Dependendo do requinte do hotel, a área do quarto poderá variar entre
+8 e 14 metros quadrados.', 'semIMG', '200');
+
+INSERT INTO TB_QUARTO VALUES ('00010', 1, 'Quarto duplo para uso individual', 'Quarto para uma pessoa, com duas
+camas.', 'semIMG', '250');
+
+INSERT INTO TB_QUARTO VALUES ('00020', 1, 'Quarto Duplo ou Twin', 'Quarto para duas pessoas. O elemento
+característico é que este quarto tem duas camas individuais', 'semIMG', '250');
+
+INSERT INTO TB_QUARTO VALUES ('00030', 1, 'Quarto Casal', 'Quarto para duas pessoas, mas com
+uma cama de casal de tamanho “king”.', 'semIMG', '300');
+
+INSERT INTO TB_QUARTO VALUES ('00040', 1, 'Quarto Triplo', 'Quarto para 3 pessoas, normalmente com 3 camas
+individuais.uarto para duas pessoas, mas com
+uma cama de casal de tamanho “king”.', 'semIMG', '350');
+
+INSERT INTO TB_QUARTO VALUES ('00050', 1, 'Quarto Quádruplo', 'Quarto para quatro pessoas',
+'semIMG', '400');
+
+INSERT INTO TB_QUARTO VALUES ('00060', 1, 'Dormitório', 'É um tipo de quarto com várias camas (normalmente
+beliches), que são alugadas por diferentes hóspedes.', 'semIMG', '100');
