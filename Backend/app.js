@@ -11,6 +11,38 @@ app.listen(port, () => {
     console.log("Projeto rodando na porta 8080");
 })
 
+
+
+
+
+function validandoCadastro(){
+    var inputNome = document.getElementById('nome');
+    var inputNomeInser = inputNome.value;
+
+    var inputUsuario = document.getElementById('Usuario');
+    var inputUsuarioInser = inputUsuario.value;
+
+    var inputEmail = document.getElementById('email');
+    var inputEmailInser = inputEmail.value;
+
+    var inputCpf = document.getElementById('cpf');
+    var inputCpfInser = inputCpf.value;
+
+    var inputTel = document.getElementById('tel');
+    var inputTelInser = inputTel.value;
+
+    var inputDtnasc = document.getElementById('dtnasc');
+    var inputDtnascInser = inputDtnasc.value;
+
+    var inputSENHA = document.getElementById('SENHA');
+    var inputSENHAInser = inputSENHA.value;
+
+    var dados = {nome: inputNomeInser, usuario: inputUsuarioInser, email: inputEmailInser, cpf: inputCpfInser, telefone: inputTelInser, data_nasc: inputDtnascInser, senha: inputSENHAInser};
+
+
+  }
+
+
 app.get('/cadastro', (req, res) => {
     let cmd_selectAll = "SELECT * FROM TB_HOSPEDE;";
     db.query(cmd_selectAll, (err, rows) => {
@@ -66,7 +98,22 @@ app.put('/cadastro/:id', (req, res) => {
         if (error) {
             res.status(400).send({ message: error });
         } else {
+
             res.status(201).json({ message: "Cadastro alterado com sucesso!" });
+
+            
+
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+  
