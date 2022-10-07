@@ -1,19 +1,17 @@
 const express = require('express');
-const session = require('express-session')
 const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs')
 const db = require('./db');
 
 let app = express();
 const port = 8080;
 
-app.use(session({secret:'udhdaoiwud12387ajk47n'}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.listen(port, () => {
-    console.log("Projeto rodando na porta " +port);
+    console.log("Projeto rodando na porta " + port);
 })
 
 /*var login = "VITOR";
@@ -67,19 +65,16 @@ app.post('/login', (req,res)=>{
     db.query(select_usuario, usuario, (err, row )=>{
         res.status(200);
         if (senha === row[0].senha){
+            res.status(201).json({ message: "Login feito com Sucesso!" });
             console.log("logado")
             res.send("LOGADO")
         }else{
+            res.status(400).send({ message: error })
             console.log("nao logado")
+            res.send("nao logado")
         }
-    });
-    
-})
-
-
-
-
-
+    }); 
+});
 
 
 /* The above code is a simple CRUD API. */
@@ -93,17 +88,20 @@ app.get('/cadastro', (req, res) => {
 app.post('/cadastro', async (req, res) => {
     let dados = req.body;
     let cmd_insert = "INSERT INTO TB_HOSPEDE (CPF, NOME, EMAIL, TELEFONE, USUARIO, DATA_NASC, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    let dados_body = [dados.cpf, dados.nome, dados.email, dados.telefone, dados.usuario, dados.data_nasc, dados.senha];
+    let dados_body = [dados.cpf, dados.nome, dados.email, dados.tel, dados.usuario, dados.dtnasc, dados.senha];
     console.log(dados_body);
+    //res.sendFile(__dirname + "/cadastro.html")
     db.query(cmd_insert, dados_body, (error, result) => {
         if (error) {
             res.status(400).send({ message: error });
+            console.log("cadastro nao feito")
         } else {
             res.status(201).json({ message: "Cadastro feito com Sucesso!" });
+            console.log("cadastro feito")
         }
     }); 
-
 });
+
 
 
 /*app.post("/cadastro", async(req,res)=>{
