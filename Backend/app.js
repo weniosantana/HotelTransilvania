@@ -13,34 +13,45 @@ app.listen(port, () => {
 
 
 
-
-
 function validandoCadastro(){
-    var inputNome = document.getElementById('nome');
-    var inputNomeInser = inputNome.value;
+    let inputNome = document.getElementById('nome');
+    var nome = inputNome.value;
 
     var inputUsuario = document.getElementById('Usuario');
-    var inputUsuarioInser = inputUsuario.value;
+    var usuario = inputUsuario.value;
 
     var inputEmail = document.getElementById('email');
-    var inputEmailInser = inputEmail.value;
+    var email = inputEmail.value;
 
     var inputCpf = document.getElementById('cpf');
-    var inputCpfInser = inputCpf.value;
+    var cpf = inputCpf.value;
 
     var inputTel = document.getElementById('tel');
-    var inputTelInser = inputTel.value;
+    var telefone = inputTel.value;
 
     var inputDtnasc = document.getElementById('dtnasc');
-    var inputDtnascInser = inputDtnasc.value;
+    var data_nasc = inputDtnasc.value;
 
     var inputSENHA = document.getElementById('SENHA');
-    var inputSENHAInser = inputSENHA.value;
+    var senha = inputSENHA.value;
 
-    var dados = {nome: inputNomeInser, usuario: inputUsuarioInser, email: inputEmailInser, cpf: inputCpfInser, telefone: inputTelInser, data_nasc: inputDtnascInser, senha: inputSENHAInser};
+    let dados = {nome: nome, usuario: usuario, email: email, cpf: cpf, telefone: telefone, data_nasc: data_nasc, senha: senha};
 
+    alert("Nome: " + dados.nome + "\nUsuário: " + dados.usuario + "\nE-mail: " + dados.email + "\nCPF: " +  dados.cpf + "\nData de Nascimento" + dados.data_nasc + "\nSenha" + dados.senha)
 
   }
+
+function validandoLogin(){
+    let inputNomeLogin = document.getElementById('nomeUserLogin');
+    let userLogin = inputNomeLogin.value;
+
+    let inputSenhaLogin = document.getElementById('senhaLogin');
+    let senhaLogin = inputSenhaLogin.value;
+
+    alert("O Login é: " + userLogin + "\nA senha é: " + senhaLogin)
+
+}
+
 
 
 app.get('/cadastro', (req, res) => {
