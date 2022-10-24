@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
-const cors = require ('cors')
+const cors = require('cors')
 
 let app = express();
 const port = 8080;
@@ -9,73 +9,30 @@ const port = 8080;
 
 app.use(bodyParser.json());
 app.use(cors())
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.listen(port, () => {
     console.log("Projeto rodando na porta " + port);
 })
 
-/*var login = "VITOR";
-var password = "123";
-app.post('/login', (req, res)=>{
-    if(req.body.password == password && req.body.login == login){
-        req.session.login = login;
-        console.log("LOGADO");
-    }else{
-        console.log("NAO LOGADO")
-    }
-})*/
 
-/*app.post('/login', async (req, res)=>{
 
-    const user = await User.findOne({
-        attributes: ['id', 'nome', 'email', 'senha'],
-        where: {
-            email: req.body.email
-        }
-    });
-    if (user ===null){
-        return res.status(400).json({
-            erro:true,
-            mensagem: "Erro: Usuário ou senha incorreto"
-        });
-    }
-    if(!(await bcrypt.compare(req.body.senha, user.senha))){
-        return res.status(400).json({
-            erro:true,
-            mensagem: "Erro: Usuário ou senha incorreto"
-        });
-    }
 
-    var token = jwt.sign({id: user.id}, "DOAWJDOAW123JDJA319230Z",{
-        expiresIn: '7d'
-    })
-    return res.json({
-        erro:false,
-        mensagem:"Login realizado com sucesso",
-        token
-    });
-    
-})*/
-
-app.post('/login', (req,res)=>{
+app.post('/login', async (req, res) => {
     let dados = req.body;
     let select_usuario = "Select senha from tb_hospede where usuario = ? ";
     let usuario = dados.usuario;
     let senha = dados.senha;
-    db.query(select_usuario, usuario, (err, row )=>{
-        res.status(200);
-        if (senha === row[0].senha){
+    db.query(select_usuario, usuario, (err, row) => {
+        if (senha === row[0].senha) {
             res.status(201).json({ message: "Login feito com Sucesso!" });
-            console.log("logado")
-            res.send("LOGADO")
-        }else{
-            res.status(400).send({ message: error })
-            console.log("nao logado")
-            res.send("nao logado")
+            return;
+        } else {
+            res.status(400).send({ message: err });
+            console.log("login nao feito")
         }
-    }); 
+    });
 });
 
 
@@ -92,34 +49,16 @@ app.post('/cadastro', async (req, res) => {
     let cmd_insert = "INSERT INTO TB_HOSPEDE (CPF, NOME, EMAIL, TELEFONE, USUARIO, DATA_NASC, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
     let dados_body = [dados.cpf, dados.nome, dados.email, dados.tel, dados.usuario, dados.dtnasc, dados.senha];
     console.log(dados_body);
-    //res.sendFile(__dirname + "/cadastro.html")
-    db.query(cmd_insert, dados_body, (error, result) => {
+    db.query(cmd_insert, dados_body, (error) => {
         if (error) {
             res.status(400).send({ message: error });
             console.log("cadastro nao feito")
         } else {
-            res.status(201).json({ message: "Cadastro feito com Sucesso!" });
-            console.log("cadastro feito")
-        }
-    }); 
+            return res.status(201).json({ message: "Cadastro feito com Sucesso!" });
+        };
+    });
 });
 
-
-
-/*app.post("/cadastro", async(req,res)=>{
-    await User.create(req.body)
-    .then(()=>{
-        return res.json({
-            erro:false,
-            mensagem:"Usuário cadastrado com sucesso!"
-        })
-    }).catch(()=>{
-        return res.status(400).json({
-            erro:true,
-            mensagem: "Erro: Usuário não cadastrado"
-        })
-    });
-})*/
 
 app.get('/cadastro/:id', (req, res) => {
     let id = req.params.id;

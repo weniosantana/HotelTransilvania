@@ -1,14 +1,13 @@
 'use strict'
 
-const url = 'http://localhost:8080/cadastro';
+const url = 'http://localhost:8080';
 
-//post
+
 
 const form = document.querySelector('#formu');
-
 const addUserItem = async user => {
   try {
-    const response = await axios.post(`${url}`, user);
+    const response = await axios.post(`${url}/cadastro`, user);
     const newUserItem = response.data;
 
     console.log(`Added a new User!`, newUserItem);
