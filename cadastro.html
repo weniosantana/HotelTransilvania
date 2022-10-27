@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
-    <script src="Backend/app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    
+    
+
     <title>CADASTRO</title>
 </head>
 <body>
@@ -24,20 +28,22 @@
         </div>
         
     </div>
+    
     <div class="sobreCada">
         <div class="sobreC">
             <div class="login">
                 
-                <form class="formulaCada">
+                <form class="formulaCada" id="formu">
                     <label for="fname">CADASTRO</label><br>
                     <input type="text" id="nome" name="nome" placeholder="NOME COMPLETO"><br>
-                    <input type="text" id="Usuario" name="usuario" placeholder="USUÁRIO"><br>
+                    <input type="text" id="usuario" name="usuario" placeholder="USUÁRIO"><br>
                     <input type="text" id="email" name="email" placeholder="E-MAIL"><br>
                     <input type="text" id="cpf" name="cpf" placeholder="CPF"><br>
                     <input type="text" id="tel" name="tel" placeholder="TELEFONE"><br>
-                    <input type="text" id="dtnasc" name="dtnasc" placeholder="DATA DE NASCIMENTO"><br>
-                    <input type="text" id="SENHA" name="SENHA" placeholder="SENHA"><br>
-                    <input class="bot" onclick="validandoCadastro()" type="submit" value="⇢"> 
+                    <input type="text" id="dtnasc" name="dtnasc" placeholder="DATA DE NASCIMENTO" ><br>
+                    <input type="password" id="senha" name="senha" placeholder="SENHA"><br>
+                    <button class="bot" type="submit">⇢</button>
+                    
                     <div class="infoCadastro">
                         <p><a href="login.html">JÁ POSSUI UMA CONTA?</a></p>
                     </div>
@@ -47,6 +53,6 @@
         </div>
         
     </div>
-    
+    <script src="/Backend/scriptcadastro.js"></script>
 </body>
 </html>

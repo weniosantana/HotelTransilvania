@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
-    <script src="Backend/app.js"></script>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Login</title>
 </head>
 <body>
@@ -31,8 +30,8 @@
                     <label for="fname">NOME DE USUÁRIO:</label><br>
                     <input type="text" id="nomeUserLogin" name="user"><br>
                     <label for="fname">SENHA:</label><br>
-                    <input type="text" id="senhaLogin" name="senha"><br>
-                    <input class="bot" onclick="validandoLogin()" type="submit" value="⇢"> 
+                    <input type="password" id="senha" name="senha"><br>
+                    <button class="bot" type="submit">⇢</button>
                     <div class="infoLogin">
                         <p><a href="">ESQUECI A MINHA SENHA</a></p>
                         <p><a href="cadastro.html">CRIAR CONTA</a></p>
@@ -43,6 +42,6 @@
         </div>
         
     </div>
-    
+    <script src="/Backend/scriptlogin.js"></script>
 </body>
 </html>

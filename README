@@ -1,0 +1,4 @@
+-------Como usar----------
+rodar no terminal:
+--npm run dev 
+--node app.js
